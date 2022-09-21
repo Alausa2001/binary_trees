@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "binary_trees.h"
 /**
  * binary_tree_insert_left - inserts value to the left branch of a binary tree
