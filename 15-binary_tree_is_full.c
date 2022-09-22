@@ -1,30 +1,24 @@
 #include "binary_trees.h"
 /**
- * binary_tree_balance - calculates the balance factor of a tree
+ * binary_tree_is_full - checks if a binary tree is full
  * @tree: pointer to root node
- * Return: the difference between the no_of_left_nodes and no_of_right_nodes
+ * Return: if full return 1 else 0
  */
-int binary_tree_balance(const binary_tree_t *tree)
+int binary_tree_is_full(const binary_tree_t *tree)
 {
 	int count_l = 0;
 	int count_r = 0;
-	const binary_tree_t *right = tree;
 
-	if (tree == NULL || (tree->left == NULL && tree->right == NULL))
+	if (tree == NULL)
 		return (0);
-
-	while (tree != NULL)
+	if (tree->right == NULL && tree->left == NULL)
+		return (1);
+	if ((tree->left) && (tree->right))
 	{
-		tree = tree->left;
-		count_l += 1;
-
+		count_r = binary_tree_is_full(tree->right);
+		count_l = binary_tree_is_full(tree->left);
 	}
-	count_l -= 1;
-	while (right != NULL)
-	{
-		right = right->right;
-		count_r++;
-	}
-	count_r -= 1;
-	return (count_l - count_r);
+	if (count_r == 1 && count_l == 1)
+		return (1);
+	return (0);
 }
