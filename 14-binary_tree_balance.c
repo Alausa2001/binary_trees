@@ -10,21 +10,38 @@ int binary_tree_balance(const binary_tree_t *tree)
 	int count_r = 0;
 	const binary_tree_t *right = tree;
 
-	if (tree == NULL || (tree->left == NULL && tree->right == NULL))
+	if (tree == NULL || binary_tree_is_leaf(tree))
 		return (0);
 
+	if (tree->right == NULL)
+		count_r = -1;
+	if (tree->left == NULL)
+		count_l = -1;
 	while (tree != NULL)
 	{
 		tree = tree->left;
 		count_l += 1;
-
 	}
-	count_l -= 1;
 	while (right != NULL)
 	{
 		right = right->right;
 		count_r++;
 	}
-	count_r -= 1;
+
 	return (count_l - count_r);
+}
+#include "binary_trees.h"
+#include <stdio.h>
+/**
+ * binary_tree_is_leaf - function checks is a node is a leafnode
+ * @node: pointer to the node
+ * Return: 1 if node is a leafnode else 0
+ */
+int binary_tree_is_leaf(const binary_tree_t *node)
+{
+	if (node == NULL)
+		return (0);
+	if (node->left == NULL && node->right == NULL)
+		return (1);
+	return (0);
 }
